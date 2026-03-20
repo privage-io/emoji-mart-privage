@@ -1,5 +1,5 @@
 import $dvPge$react, {useRef as $dvPge$useRef, useEffect as $dvPge$useEffect} from "react";
-import {Picker as $dvPge$Picker} from "emoji-mart-awesome";
+import {Picker as $dvPge$Picker} from "@privagexyz/emoji-mart";
 
 // @ts-nocheck
 

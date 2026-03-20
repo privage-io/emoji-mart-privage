@@ -1,5 +1,5 @@
 var $1JSLv$react = require("react");
-var $1JSLv$emojimartawesome = require("emoji-mart-awesome");
+var $1JSLv$privagexyzemojimart = require("@privagexyz/emoji-mart");
 
 
 function $parcel$interopDefault(a) {
@@ -20,7 +20,7 @@ function $be92a0095b219678$export$6335145236247192(props) {
     const instance = (0, $1JSLv$react.useRef)(null);
     if (instance.current) instance.current.update(props);
     (0, $1JSLv$react.useEffect)(()=>{
-        const PickerConstructor = window?.customElements.get('em-emoji-picker') ?? (0, $1JSLv$emojimartawesome.Picker);
+        const PickerConstructor = window?.customElements.get('em-emoji-picker') ?? (0, $1JSLv$privagexyzemojimart.Picker);
         instance.current = new PickerConstructor({
             ...props,
             ref: ref

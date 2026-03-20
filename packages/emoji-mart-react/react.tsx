@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, { useEffect, useRef } from 'react'
-import { Emoji, Picker } from 'emoji-mart-awesome'
+import { Emoji, Picker } from '@privagexyz/emoji-mart'
 
 export function EmojiPicker(props) {
   const ref = useRef(null)

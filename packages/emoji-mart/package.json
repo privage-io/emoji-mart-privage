@@ -1,11 +1,11 @@
 {
-  "name": "emoji-mart-awesome",
+  "name": "@privagexyz/emoji-mart",
   "version": "3.0.0",
   "description": "Custom Fork of an Emoji picker for the web",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/viaduck/emoji-mart-awesome",
+    "url": "https://github.com/privage-io/emoji-mart-privage",
     "directory": "packages/emoji-mart"
   },
   "source": "src/index.ts",

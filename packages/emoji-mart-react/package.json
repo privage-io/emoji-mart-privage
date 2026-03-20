@@ -1,11 +1,11 @@
 {
-  "name": "@emoji-mart-awesome/react",
+  "name": "@privagexyz/emoji-mart-react",
   "version": "1.0.0",
   "description": "React wrapper for Custom Fork of Emoji Mart; the emoji picker for the web.",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/viaduck/emoji-mart-awesome",
+    "url": "https://github.com/privage-io/emoji-mart-privage",
     "directory": "packages/emoji-mart-react"
   },
   "source": "react.tsx",
@@ -17,7 +17,7 @@
     "prepublishOnly": "yarn build"
   },
   "peerDependencies": {
-    "emoji-mart-awesome": "^3.0.0",
+    "@privagexyz/emoji-mart": "^3.0.0",
     "react": "^16.8 || ^17 || ^18 || ^19"
   },
   "files": [

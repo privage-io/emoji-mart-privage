@@ -80,12 +80,14 @@ async function _init(props) {
 
     Data.originalCategories = Data.categories
   } else {
-    Data.categories = Data.categories.filter((c) => {
-      const isCustom = !!c.name
-      if (!isCustom) return true
-
-      return false
-    })
+    // Re-init: clear old custom emojis from Data.emojis, then restore original categories
+    const originalIds = new Set(
+      Data.originalCategories.flatMap((c) => c.emojis || []).map((e) => (typeof e === "string" ? e : e?.id)).filter(Boolean)
+    )
+    for (const id of Object.keys(Data.emojis)) {
+      if (!originalIds.has(id)) delete Data.emojis[id]
+    }
+    Data.categories = Data.originalCategories.slice()
   }
 
   I18n =

@@ -121,11 +121,14 @@ async function _init(props) {
       }
     }
 
-    if (props.customPosition === 'start') {
+    const startCategories = customCategories.filter(c => (c.position || props.customPosition || 'end') === 'start')
+    const endCategories = customCategories.filter(c => (c.position || props.customPosition || 'end') !== 'start')
+    if (startCategories.length) {
       const insertIdx = Data.categories.findIndex(c => c.id !== 'frequent')
-      Data.categories.splice(insertIdx >= 0 ? insertIdx : 0, 0, ...customCategories)
-    } else {
-      Data.categories.push(...customCategories)
+      Data.categories.splice(insertIdx >= 0 ? insertIdx : 0, 0, ...startCategories)
+    }
+    if (endCategories.length) {
+      Data.categories.push(...endCategories)
     }
   }
 

@@ -797,10 +797,13 @@ async function $47b4a70d4572a3b3$var$_init(props) {
             customCategories.push(category);
             for (const emoji of category.emojis)$47b4a70d4572a3b3$export$2d0294657ab35f1b.emojis[emoji.id] = emoji;
         }
-        if (props.customPosition === 'start') {
+        const startCategories = customCategories.filter((c)=>(c.position || props.customPosition || 'end') === 'start');
+        const endCategories = customCategories.filter((c)=>(c.position || props.customPosition || 'end') !== 'start');
+        if (startCategories.length) {
             const insertIdx = $47b4a70d4572a3b3$export$2d0294657ab35f1b.categories.findIndex((c)=>c.id !== 'frequent');
-            $47b4a70d4572a3b3$export$2d0294657ab35f1b.categories.splice(insertIdx >= 0 ? insertIdx : 0, 0, ...customCategories);
-        } else $47b4a70d4572a3b3$export$2d0294657ab35f1b.categories.push(...customCategories);
+            $47b4a70d4572a3b3$export$2d0294657ab35f1b.categories.splice(insertIdx >= 0 ? insertIdx : 0, 0, ...startCategories);
+        }
+        if (endCategories.length) $47b4a70d4572a3b3$export$2d0294657ab35f1b.categories.push(...endCategories);
     }
     if (props.categories) $47b4a70d4572a3b3$export$2d0294657ab35f1b.categories = $47b4a70d4572a3b3$export$2d0294657ab35f1b.originalCategories.filter((c)=>{
         return props.categories.indexOf(c.id) != -1;

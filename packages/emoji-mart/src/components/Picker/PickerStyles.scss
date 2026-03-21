@@ -341,7 +341,7 @@ button {
 #preview {
   z-index: 2;
   position: relative;
-  padding: calc(var(--padding) + 4px) var(--padding);
+  padding: var(--padding-small) var(--padding);
   padding-right: var(--sidebar-width);
 
   .preview-placeholder { font-size: var(--preview-placeholder-size) }
@@ -429,6 +429,7 @@ button {
   border: 1px solid transparent;
 
   &:hover { border-color: var(--em-color-border) }
+  &:has(> span:not(.skin-tone)) { border: none !important; background: none !important; }
 
   &:active { .skin-tone { transform: scale(.85) !important } }
              .skin-tone { transition: transform var(--duration) var(--easing) }

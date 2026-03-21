@@ -165,6 +165,7 @@ export class Picker extends ShadowElement {
         categories: any;
         categoryIcons: any;
         custom: any;
+        customPosition: string;
         data: any;
         i18n: any;
         getImageURL: any;

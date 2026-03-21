@@ -700,6 +700,7 @@ var $b247ea80b67298d5$export$2e2bcd8739ae039 = {
     categories: null,
     categoryIcons: null,
     custom: null,
+    customPosition: "end",
     data: null,
     i18n: null,
     // Callbacks
@@ -768,16 +769,23 @@ async function $7adb23b0109cc36a$var$_init(props) {
         $7adb23b0109cc36a$export$2d0294657ab35f1b.categories = $7adb23b0109cc36a$export$2d0294657ab35f1b.originalCategories.slice();
     }
     $7adb23b0109cc36a$export$dbe3113d60765c1a = (typeof props.i18n === 'function' ? await props.i18n() : props.i18n) || (locale == 'en' ? (0, (/*@__PURE__*/$parcel$interopDefault($8d50d93417ef682a$exports))) : await $7adb23b0109cc36a$var$fetchJSON(`https://cdn.jsdelivr.net/npm/@emoji-mart/data@latest/i18n/${locale}.json`));
-    if (props.custom) for(let i in props.custom){
-        i = parseInt(i);
-        const category = props.custom[i];
-        const prevCategory = props.custom[i - 1];
-        if (!category.emojis || !category.emojis.length) continue;
-        category.id || (category.id = `custom_${i + 1}`);
-        category.name || (category.name = $7adb23b0109cc36a$export$dbe3113d60765c1a.categories.custom);
-        if (prevCategory && !category.icon) category.target = prevCategory.target || prevCategory;
-        $7adb23b0109cc36a$export$2d0294657ab35f1b.categories.push(category);
-        for (const emoji of category.emojis)$7adb23b0109cc36a$export$2d0294657ab35f1b.emojis[emoji.id] = emoji;
+    if (props.custom) {
+        const customCategories = [];
+        for(let i in props.custom){
+            i = parseInt(i);
+            const category = props.custom[i];
+            const prevCategory = props.custom[i - 1];
+            if (!category.emojis || !category.emojis.length) continue;
+            category.id || (category.id = `custom_${i + 1}`);
+            category.name || (category.name = $7adb23b0109cc36a$export$dbe3113d60765c1a.categories.custom);
+            if (prevCategory && !category.icon) category.target = prevCategory.target || prevCategory;
+            customCategories.push(category);
+            for (const emoji of category.emojis)$7adb23b0109cc36a$export$2d0294657ab35f1b.emojis[emoji.id] = emoji;
+        }
+        if (props.customPosition === 'start') {
+            const insertIdx = $7adb23b0109cc36a$export$2d0294657ab35f1b.categories.findIndex((c)=>c.id !== 'frequent');
+            $7adb23b0109cc36a$export$2d0294657ab35f1b.categories.splice(insertIdx >= 0 ? insertIdx : 0, 0, ...customCategories);
+        } else $7adb23b0109cc36a$export$2d0294657ab35f1b.categories.push(...customCategories);
     }
     if (props.categories) $7adb23b0109cc36a$export$2d0294657ab35f1b.categories = $7adb23b0109cc36a$export$2d0294657ab35f1b.originalCategories.filter((c)=>{
         return props.categories.indexOf(c.id) != -1;

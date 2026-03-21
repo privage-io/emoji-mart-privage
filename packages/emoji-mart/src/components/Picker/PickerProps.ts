@@ -103,6 +103,7 @@ export default {
   categories: null,
   categoryIcons: null,
   custom: null,
+  customPosition: "end",
   data: null,
   i18n: null,
 

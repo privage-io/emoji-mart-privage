@@ -99,6 +99,7 @@ async function _init(props) {
         ))
 
   if (props.custom) {
+    const customCategories = []
     for (let i in props.custom) {
       i = parseInt(i)
       const category = props.custom[i]
@@ -113,11 +114,18 @@ async function _init(props) {
         category.target = prevCategory.target || prevCategory
       }
 
-      Data.categories.push(category)
+      customCategories.push(category)
 
       for (const emoji of category.emojis) {
         Data.emojis[emoji.id] = emoji
       }
+    }
+
+    if (props.customPosition === 'start') {
+      const insertIdx = Data.categories.findIndex(c => c.id !== 'frequent')
+      Data.categories.splice(insertIdx >= 0 ? insertIdx : 0, 0, ...customCategories)
+    } else {
+      Data.categories.push(...customCategories)
     }
   }
 

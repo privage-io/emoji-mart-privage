@@ -64,11 +64,11 @@ export default function Emoji(props) {
             width: spritesheetSrc ? props.size : undefined,
             height: spritesheetSrc ? props.size : undefined,
 
-            backgroundImage: `url(${spritesheetSrc})`,
-            backgroundSize: `${100 * Data.sheet.cols}% ${
+            backgroundImage: emojiSkin.src ? undefined : `url(${spritesheetSrc})`,
+            backgroundSize: emojiSkin.src ? undefined : `${100 * Data.sheet.cols}% ${
               100 * Data.sheet.rows
             }%`,
-            backgroundPosition: `${
+            backgroundPosition: emojiSkin.src ? undefined : `${
               (100 / (Data.sheet.cols - 1)) * emojiSkin.x
             }% ${(100 / (Data.sheet.rows - 1)) * emojiSkin.y}%`,
 

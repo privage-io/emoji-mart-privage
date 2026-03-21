@@ -796,6 +796,7 @@ async function $47b4a70d4572a3b3$var$_init(props) {
             if (prevCategory && !category.icon) category.target = prevCategory.target || prevCategory;
             customCategories.push(category);
             for (const emoji of category.emojis){
+                if (typeof emoji === "string") continue; // string IDs reference existing emojis, skip
                 if (!emoji.search) emoji.search = "," + [
                     emoji.id,
                     emoji.name,

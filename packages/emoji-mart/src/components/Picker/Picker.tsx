@@ -939,9 +939,8 @@ export default class Picker extends Component {
               data-id={category.target ? category.target.id : category.id}
               class="category"
               ref={root}
-              style={category.background ? { backgroundColor: category.background } : undefined}
             >
-              <div class={`sticky padding-small align-${this.dir[0]}`} style={{ display: 'flex', alignItems: 'center', gap: '6px', ...(category.background ? { backgroundColor: category.background } : {}) }}>
+              <div class={`sticky padding-small align-${this.dir[0]}`} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                 {category.icon && category.icon.src && <img src={category.icon.src} style={{ width: 16, height: 16, borderRadius: '50%', objectFit: 'cover' }} />}
                 {category.name || I18n.categories[category.id]}
               </div>
@@ -949,6 +948,7 @@ export default class Picker extends Component {
                 class="relative"
                 style={{
                   height: rows.length * this.props.emojiButtonSize,
+                  ...(category.background ? { backgroundColor: category.background, borderRadius: '8px' } : {}),
                 }}
               >
                 {rows.map((row, i) => {

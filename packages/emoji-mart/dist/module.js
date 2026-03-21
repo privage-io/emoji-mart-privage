@@ -2805,19 +2805,13 @@ class $89bd6bb200cc8fef$export$2e2bcd8739ae039 extends (0, $fb96b826c0c5f37a$exp
                     "data-id": category.target ? category.target.id : category.id,
                     class: "category",
                     ref: root,
-                    style: category.background ? {
-                        backgroundColor: category.background
-                    } : undefined,
                     children: [
                         /*#__PURE__*/ (0, $bd9dd35321b03dd4$export$34b9dba7ce09269b)("div", {
                             class: `sticky padding-small align-${this.dir[0]}`,
                             style: {
                                 display: 'flex',
                                 alignItems: 'center',
-                                gap: '6px',
-                                ...category.background ? {
-                                    backgroundColor: category.background
-                                } : {}
+                                gap: '6px'
                             },
                             children: [
                                 category.icon && category.icon.src && /*#__PURE__*/ (0, $bd9dd35321b03dd4$export$34b9dba7ce09269b)("img", {
@@ -2835,7 +2829,11 @@ class $89bd6bb200cc8fef$export$2e2bcd8739ae039 extends (0, $fb96b826c0c5f37a$exp
                         /*#__PURE__*/ (0, $bd9dd35321b03dd4$export$34b9dba7ce09269b)("div", {
                             class: "relative",
                             style: {
-                                height: rows.length * this.props.emojiButtonSize
+                                height: rows.length * this.props.emojiButtonSize,
+                                ...category.background ? {
+                                    backgroundColor: category.background,
+                                    borderRadius: '8px'
+                                } : {}
                             },
                             children: rows.map((row, i)=>{
                                 const targetRow = row.index - row.index % $89bd6bb200cc8fef$var$Performance.rowsPerRender;

@@ -131,7 +131,7 @@ async function _init(props) {
     if (endCategories.length) {
       Data.categories.push(...endCategories)
     }
-    resetSearchIndex = true
+    SearchIndex.reset()
   }
 
   if (props.categories) {
@@ -214,7 +214,6 @@ async function _init(props) {
       }
 
       if (!emoji.search) {
-        resetSearchIndex = true
         emoji.search =
           ',' +
           [

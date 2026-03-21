@@ -812,7 +812,7 @@ async function $47b4a70d4572a3b3$var$_init(props) {
             $47b4a70d4572a3b3$export$2d0294657ab35f1b.categories.splice(insertIdx >= 0 ? insertIdx : 0, 0, ...startCategories);
         }
         if (endCategories.length) $47b4a70d4572a3b3$export$2d0294657ab35f1b.categories.push(...endCategories);
-        resetSearchIndex = true;
+        (0, $022b4a7de802d8eb$export$2e2bcd8739ae039).reset();
     }
     if (props.categories) $47b4a70d4572a3b3$export$2d0294657ab35f1b.categories = $47b4a70d4572a3b3$export$2d0294657ab35f1b.originalCategories.filter((c)=>{
         return props.categories.indexOf(c.id) != -1;
@@ -871,7 +871,6 @@ async function $47b4a70d4572a3b3$var$_init(props) {
                 }
             }
             if (!emoji.search) {
-                resetSearchIndex = true;
                 emoji.search = ',' + [
                     [
                         emoji.id,

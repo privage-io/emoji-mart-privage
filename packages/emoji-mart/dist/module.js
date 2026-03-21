@@ -797,7 +797,7 @@ async function $7adb23b0109cc36a$var$_init(props) {
             $7adb23b0109cc36a$export$2d0294657ab35f1b.categories.splice(insertIdx >= 0 ? insertIdx : 0, 0, ...startCategories);
         }
         if (endCategories.length) $7adb23b0109cc36a$export$2d0294657ab35f1b.categories.push(...endCategories);
-        resetSearchIndex = true;
+        (0, $c4d155af13ad4d4b$export$2e2bcd8739ae039).reset();
     }
     if (props.categories) $7adb23b0109cc36a$export$2d0294657ab35f1b.categories = $7adb23b0109cc36a$export$2d0294657ab35f1b.originalCategories.filter((c)=>{
         return props.categories.indexOf(c.id) != -1;
@@ -856,7 +856,6 @@ async function $7adb23b0109cc36a$var$_init(props) {
                 }
             }
             if (!emoji.search) {
-                resetSearchIndex = true;
                 emoji.search = ',' + [
                     [
                         emoji.id,

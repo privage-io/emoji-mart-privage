@@ -2798,7 +2798,23 @@ class $89bd6bb200cc8fef$export$2e2bcd8739ae039 extends (0, $fb96b826c0c5f37a$exp
                     children: [
                         /*#__PURE__*/ (0, $bd9dd35321b03dd4$export$34b9dba7ce09269b)("div", {
                             class: `sticky padding-small align-${this.dir[0]}`,
-                            children: category.name || (0, $7adb23b0109cc36a$export$dbe3113d60765c1a).categories[category.id]
+                            style: {
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '6px'
+                            },
+                            children: [
+                                category.icon && category.icon.src && /*#__PURE__*/ (0, $bd9dd35321b03dd4$export$34b9dba7ce09269b)("img", {
+                                    src: category.icon.src,
+                                    style: {
+                                        width: 16,
+                                        height: 16,
+                                        borderRadius: '50%',
+                                        objectFit: 'cover'
+                                    }
+                                }),
+                                category.name || (0, $7adb23b0109cc36a$export$dbe3113d60765c1a).categories[category.id]
+                            ]
                         }),
                         /*#__PURE__*/ (0, $bd9dd35321b03dd4$export$34b9dba7ce09269b)("div", {
                             class: "relative",

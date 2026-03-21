@@ -2798,7 +2798,9 @@ class $75afa6943437e26f$export$2e2bcd8739ae039 extends (0, $d5fc6ac583bc94a1$exp
                 height: '100%'
             },
             children: categories.map((category)=>{
-                const { root: root, rows: rows } = this.refs.categories.get(category.id);
+                const catRef = this.refs.categories.get(category.id);
+                if (!catRef) return null;
+                const { root: root, rows: rows } = catRef;
                 return /*#__PURE__*/ (0, $55ec52987511209e$export$34b9dba7ce09269b)("div", {
                     "data-id": category.target ? category.target.id : category.id,
                     class: "category",

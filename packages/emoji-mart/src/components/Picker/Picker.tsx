@@ -932,7 +932,7 @@ export default class Picker extends Component {
         }}
       >
         {categories.map((category) => {
-          const { root, rows } = this.refs.categories.get(category.id)
+          const catRef = this.refs.categories.get(category.id); if (!catRef) return null; const { root, rows } = catRef
 
           return (
             <div

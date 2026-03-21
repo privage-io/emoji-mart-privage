@@ -2162,9 +2162,11 @@ class $89bd6bb200cc8fef$export$2e2bcd8739ae039 extends (0, $fb96b826c0c5f37a$exp
             const { searchInput: searchInput } = this.refs;
             if (searchInput.current) searchInput.current.focus();
         }
-        this.scrollTo({
-            categoryId: 'frequent'
-        });
+        try {
+            this.scrollTo({
+                categoryId: 'frequent'
+            });
+        } catch  {}
     }
     componentWillReceiveProps(nextProps) {
         this.nextState || (this.nextState = {});
@@ -2610,7 +2612,8 @@ class $89bd6bb200cc8fef$export$2e2bcd8739ae039 extends (0, $fb96b826c0c5f37a$exp
     }
     renderEmojiButton(emoji, { pos: pos, posinset: posinset, grid: grid, forceSkin: forceSkin }) {
         const size = this.props.emojiButtonSize;
-        const lastSkin = (0, $b22cfd0a55410b4f$export$2e2bcd8739ae039).getSkin(emoji.id);
+        const lastSkin = null // per-emoji skin memory disabled
+        ;
         const skin = forceSkin || lastSkin || this.state.tempSkin || this.state.skin;
         const emojiSkin = emoji.skins[skin - 1] || emoji.skins[0];
         const skinnable = !forceSkin && emoji.skins.length > 1;
@@ -2629,7 +2632,7 @@ class $89bd6bb200cc8fef$export$2e2bcd8739ae039 extends (0, $fb96b826c0c5f37a$exp
                 "data-keyboard": this.state.keyboard,
                 title: this.props.previewPosition == 'none' ? emoji.name : undefined,
                 type: "button",
-                class: `flex flex-center flex-middle ${skinnable ? 'skinnable' : ''}`,
+                class: "flex flex-center flex-middle",
                 tabindex: "-1",
                 onClick: (e)=>this.handleEmojiClick({
                         e: e,
@@ -2638,11 +2641,7 @@ class $89bd6bb200cc8fef$export$2e2bcd8739ae039 extends (0, $fb96b826c0c5f37a$exp
                     }),
                 onContextMenu: (e)=>{
                     e.preventDefault();
-                    skinnable && this.handleEmojiRightClick({
-                        e: e,
-                        emoji: emoji,
-                        pos: pos
-                    });
+                // inline skin disabled
                 },
                 onMouseEnter: ()=>this.handleEmojiOver(pos),
                 onMouseLeave: ()=>this.handleEmojiOver(),

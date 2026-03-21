@@ -73,7 +73,7 @@ export default class Picker extends Component {
       }
     }
 
-    this.scrollTo({ categoryId: 'frequent' })
+    try { this.scrollTo({ categoryId: 'frequent' }) } catch {}
   }
 
   componentWillReceiveProps(nextProps) {
@@ -783,7 +783,7 @@ export default class Picker extends Component {
 
   renderEmojiButton(emoji, { pos, posinset, grid, forceSkin }) {
     const size = this.props.emojiButtonSize
-    const lastSkin = FrequentlyUsed.getSkin(emoji.id)
+    const lastSkin = null // per-emoji skin memory disabled
     const skin = forceSkin || lastSkin || this.state.tempSkin || this.state.skin
     const emojiSkin = emoji.skins[skin - 1] || emoji.skins[0]
     const skinnable = !forceSkin && emoji.skins.length > 1
@@ -801,12 +801,12 @@ export default class Picker extends Component {
           data-keyboard={this.state.keyboard}
           title={this.props.previewPosition == 'none' ? emoji.name : undefined}
           type="button"
-          class={`flex flex-center flex-middle ${skinnable ? 'skinnable' : ''}`}
+          class="flex flex-center flex-middle"
           tabindex="-1"
           onClick={(e) => this.handleEmojiClick({ e, emoji, skin })}
           onContextMenu={(e) => {
             e.preventDefault()
-            skinnable && this.handleEmojiRightClick({ e, emoji, pos })
+            // inline skin disabled
           }}
           onMouseEnter={() => this.handleEmojiOver(pos)}
           onMouseLeave={() => this.handleEmojiOver()}

@@ -941,7 +941,7 @@ export default class Picker extends Component {
               ref={root}
             >
               <div class={`sticky padding-small align-${this.dir[0]}`} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                {category.icon && category.icon.src && <img src={category.icon.src} style={{ width: 16, height: 16, borderRadius: '50%', objectFit: 'cover' }} />}
+                {category.icon && category.icon.src && <img src={category.icon.src} style={{ width: 16, height: 16, borderRadius: category.icon.radius || '20%', objectFit: 'cover' }} />}
                 {category.name || I18n.categories[category.id]}
               </div>
               <div

@@ -2820,7 +2820,7 @@ class $89bd6bb200cc8fef$export$2e2bcd8739ae039 extends (0, $fb96b826c0c5f37a$exp
                                     style: {
                                         width: 16,
                                         height: 16,
-                                        borderRadius: '50%',
+                                        borderRadius: category.icon.radius || '20%',
                                         objectFit: 'cover'
                                     }
                                 }),

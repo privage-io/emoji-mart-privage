@@ -2835,7 +2835,7 @@ class $75afa6943437e26f$export$2e2bcd8739ae039 extends (0, $d5fc6ac583bc94a1$exp
                                     style: {
                                         width: 16,
                                         height: 16,
-                                        borderRadius: '50%',
+                                        borderRadius: category.icon.radius || '20%',
                                         objectFit: 'cover'
                                     }
                                 }),

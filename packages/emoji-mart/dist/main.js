@@ -2633,7 +2633,8 @@ class $75afa6943437e26f$export$2e2bcd8739ae039 extends (0, $d5fc6ac583bc94a1$exp
         const emojiSkin = emoji.skins[skin - 1] || emoji.skins[0];
         const skinnable = !forceSkin && emoji.skins.length > 1;
         const native = emojiSkin.native;
-        const selected = (0, $0542300b6c56b62c$export$9cb4719e2e525b7a)(this.state.pos, pos);
+        const selected = false // disable hover-triggered re-renders
+        ;
         const key = pos.concat(emoji.id).join('');
         return /*#__PURE__*/ (0, $55ec52987511209e$export$34b9dba7ce09269b)((0, $caeffba843b1695e$export$2e2bcd8739ae039), {
             selected: selected,

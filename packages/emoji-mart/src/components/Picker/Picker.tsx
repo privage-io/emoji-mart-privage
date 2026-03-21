@@ -788,7 +788,7 @@ export default class Picker extends Component {
     const emojiSkin = emoji.skins[skin - 1] || emoji.skins[0]
     const skinnable = !forceSkin && emoji.skins.length > 1
     const native = emojiSkin.native
-    const selected = deepEqual(this.state.pos, pos)
+    const selected = false // disable hover-triggered re-renders
     const key = pos.concat(emoji.id).join('')
 
     return (

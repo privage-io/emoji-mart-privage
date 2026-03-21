@@ -131,6 +131,7 @@ async function _init(props) {
     if (endCategories.length) {
       Data.categories.push(...endCategories)
     }
+    resetSearchIndex = true
   }
 
   if (props.categories) {

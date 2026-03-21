@@ -118,7 +118,7 @@ async function _init(props) {
 
       for (const emoji of category.emojis) {
         if (typeof emoji === "string") continue // string IDs reference existing emojis, skip
-        if (!emoji.search) { emoji.search = "," + [emoji.id, emoji.name, ...(emoji.keywords || [])].join(",") + "," } Data.emojis[emoji.id] = emoji
+        if (!emoji.search) { emoji.search = ("," + [emoji.id, emoji.name, ...(emoji.keywords || [])].join(",") + ",").toLowerCase() } Data.emojis[emoji.id] = emoji
       }
     }
 

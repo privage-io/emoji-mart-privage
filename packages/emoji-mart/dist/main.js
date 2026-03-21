@@ -797,11 +797,11 @@ async function $47b4a70d4572a3b3$var$_init(props) {
             customCategories.push(category);
             for (const emoji of category.emojis){
                 if (typeof emoji === "string") continue; // string IDs reference existing emojis, skip
-                if (!emoji.search) emoji.search = "," + [
+                if (!emoji.search) emoji.search = ("," + [
                     emoji.id,
                     emoji.name,
                     ...emoji.keywords || []
-                ].join(",") + ",";
+                ].join(",") + ",").toLowerCase();
                 $47b4a70d4572a3b3$export$2d0294657ab35f1b.emojis[emoji.id] = emoji;
             }
         }

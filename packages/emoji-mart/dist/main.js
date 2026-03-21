@@ -795,7 +795,14 @@ async function $47b4a70d4572a3b3$var$_init(props) {
             category.name || (category.name = $47b4a70d4572a3b3$export$dbe3113d60765c1a.categories.custom);
             if (prevCategory && !category.icon) category.target = prevCategory.target || prevCategory;
             customCategories.push(category);
-            for (const emoji of category.emojis)$47b4a70d4572a3b3$export$2d0294657ab35f1b.emojis[emoji.id] = emoji;
+            for (const emoji of category.emojis){
+                if (!emoji.search) emoji.search = "," + [
+                    emoji.id,
+                    emoji.name,
+                    ...emoji.keywords || []
+                ].join(",") + ",";
+                $47b4a70d4572a3b3$export$2d0294657ab35f1b.emojis[emoji.id] = emoji;
+            }
         }
         const startCategories = customCategories.filter((c)=>(c.position || props.customPosition || 'end') === 'start');
         const endCategories = customCategories.filter((c)=>(c.position || props.customPosition || 'end') !== 'start');

@@ -117,7 +117,7 @@ async function _init(props) {
       customCategories.push(category)
 
       for (const emoji of category.emojis) {
-        Data.emojis[emoji.id] = emoji
+        if (!emoji.search) { emoji.search = "," + [emoji.id, emoji.name, ...(emoji.keywords || [])].join(",") + "," } Data.emojis[emoji.id] = emoji
       }
     }
 

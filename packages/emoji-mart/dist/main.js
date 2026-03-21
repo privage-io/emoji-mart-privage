@@ -2453,7 +2453,9 @@ class $75afa6943437e26f$export$2e2bcd8739ae039 extends (0, $d5fc6ac583bc94a1$exp
         let scrollTop = 0;
         if (row >= 0) categoryId = grid[row].__categoryId;
         if (categoryId) {
-            const ref = this.refs[categoryId] || this.refs.categories.get(categoryId).root;
+            const catEntry = this.refs[categoryId] || this.refs.categories?.get(categoryId);
+            const ref = catEntry?.root || catEntry;
+            if (!ref?.current) return;
             const categoryRect = ref.current.getBoundingClientRect();
             scrollTop = categoryRect.top - (scrollRect.top - scroll.scrollTop) + 1;
         }

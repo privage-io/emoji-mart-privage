@@ -568,8 +568,12 @@ export default class Picker extends Component {
     }
 
     if (categoryId) {
-      const ref =
-        this.refs[categoryId] || this.refs.categories.get(categoryId).root
+      const catEntry = this.refs[categoryId] || this.refs.categories?.get(categoryId)
+      const ref = catEntry?.root || catEntry
+      if (!ref?.current) return
+
+
+
       const categoryRect = ref.current.getBoundingClientRect()
 
       scrollTop = categoryRect.top - (scrollRect.top - scroll.scrollTop) + 1

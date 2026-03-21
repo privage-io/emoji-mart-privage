@@ -760,7 +760,7 @@ async function $7adb23b0109cc36a$var$_init(props) {
             emoji.aliases || (emoji.aliases = []);
             emoji.aliases.push(alias);
         }
-        $7adb23b0109cc36a$export$2d0294657ab35f1b.originalCategories = $7adb23b0109cc36a$export$2d0294657ab35f1b.categories;
+        $7adb23b0109cc36a$export$2d0294657ab35f1b.originalCategories = $7adb23b0109cc36a$export$2d0294657ab35f1b.categories.slice();
     } else {
         // Re-init: clear old custom emojis from Data.emojis, then restore original categories
         const originalIds = new Set($7adb23b0109cc36a$export$2d0294657ab35f1b.originalCategories.flatMap((c)=>c.emojis || []).map((e)=>typeof e === "string" ? e : e?.id).filter(Boolean));

@@ -78,7 +78,7 @@ async function _init(props) {
       emoji.aliases.push(alias)
     }
 
-    Data.originalCategories = Data.categories
+    Data.originalCategories = Data.categories.slice()
   } else {
     // Re-init: clear old custom emojis from Data.emojis, then restore original categories
     const originalIds = new Set(

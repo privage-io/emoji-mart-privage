@@ -1172,8 +1172,8 @@ export default class Picker extends Component {
         {this.state.inlineSkin && this.renderInlineSkinPicker()}
         {this.props.previewPosition == 'top' && this.renderPreview()}
         {this.props.navPosition == 'top' && this.renderNav()}
-        {this.props.searchPosition == 'sticky' && (
-          <div class="padding-lr">{this.renderSearch()}</div>
+        {(this.props.searchPosition == 'sticky' || this.props.searchPosition == 'hidden') && (
+          <div class="padding-lr" style={this.props.searchPosition == 'hidden' ? { position: 'absolute', opacity: 0, pointerEvents: 'none', height: 0, overflow: 'hidden' } : undefined}>{this.renderSearch()}</div>
         )}
 
         <div ref={this.refs.scroll} class={`scroll flex-grow padding-lr ${disabled}`}>

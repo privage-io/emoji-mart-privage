@@ -80,7 +80,7 @@ export default {
   },
   searchPosition: {
     value: 'sticky',
-    choices: ['sticky', 'static', 'none'],
+    choices: ['sticky', 'static', 'none', 'hidden'],
   },
   set: {
     value: 'native',

@@ -671,7 +671,8 @@ var $f39d0d696aba82c3$export$2e2bcd8739ae039 = {
         choices: [
             'sticky',
             'static',
-            'none'
+            'none',
+            'hidden'
         ]
     },
     set: {
@@ -3045,8 +3046,15 @@ class $75afa6943437e26f$export$2e2bcd8739ae039 extends (0, $d5fc6ac583bc94a1$exp
                 this.state.inlineSkin && this.renderInlineSkinPicker(),
                 this.props.previewPosition == 'top' && this.renderPreview(),
                 this.props.navPosition == 'top' && this.renderNav(),
-                this.props.searchPosition == 'sticky' && /*#__PURE__*/ (0, $55ec52987511209e$export$34b9dba7ce09269b)("div", {
+                (this.props.searchPosition == 'sticky' || this.props.searchPosition == 'hidden') && /*#__PURE__*/ (0, $55ec52987511209e$export$34b9dba7ce09269b)("div", {
                     class: "padding-lr",
+                    style: this.props.searchPosition == 'hidden' ? {
+                        position: 'absolute',
+                        opacity: 0,
+                        pointerEvents: 'none',
+                        height: 0,
+                        overflow: 'hidden'
+                    } : undefined,
                     children: this.renderSearch()
                 }),
                 /*#__PURE__*/ (0, $55ec52987511209e$export$34b9dba7ce09269b)("div", {

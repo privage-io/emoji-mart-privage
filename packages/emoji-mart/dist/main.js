@@ -696,6 +696,7 @@ var $f39d0d696aba82c3$export$2e2bcd8739ae039 = {
         ]
     },
     skinToneEmoji: null,
+    onLockedEmojiClick: null,
     skinTonePosition: {
         value: 'preview',
         choices: [
@@ -2670,14 +2671,19 @@ class $75afa6943437e26f$export$2e2bcd8739ae039 extends (0, $d5fc6ac583bc94a1$exp
                 type: "button",
                 class: "flex flex-center flex-middle",
                 tabindex: "-1",
-                onClick: (e)=>this.handleEmojiClick({
+                onClick: (e)=>{
+                    if (emoji.locked) {
+                        if (this.props.onLockedEmojiClick) this.props.onLockedEmojiClick(emoji);
+                        return;
+                    }
+                    this.handleEmojiClick({
                         e: e,
                         emoji: emoji,
                         skin: skin
-                    }),
+                    });
+                },
                 onContextMenu: (e)=>{
                     e.preventDefault();
-                // inline skin disabled
                 },
                 onMouseEnter: ()=>this.handleEmojiOver(pos),
                 onMouseLeave: ()=>this.handleEmojiOver(),
@@ -2685,7 +2691,11 @@ class $75afa6943437e26f$export$2e2bcd8739ae039 extends (0, $d5fc6ac583bc94a1$exp
                     width: this.props.emojiButtonSize,
                     height: this.props.emojiButtonSize,
                     fontSize: this.props.emojiSize,
-                    lineHeight: 0
+                    lineHeight: 0,
+                    ...emoji.locked ? {
+                        opacity: 0.35,
+                        cursor: 'not-allowed'
+                    } : {}
                 },
                 children: [
                     /*#__PURE__*/ (0, $55ec52987511209e$export$34b9dba7ce09269b)("div", {
@@ -2810,13 +2820,19 @@ class $75afa6943437e26f$export$2e2bcd8739ae039 extends (0, $d5fc6ac583bc94a1$exp
                     "data-id": category.target ? category.target.id : category.id,
                     class: "category",
                     ref: root,
+                    style: category.background ? {
+                        backgroundColor: category.background
+                    } : undefined,
                     children: [
                         /*#__PURE__*/ (0, $55ec52987511209e$export$34b9dba7ce09269b)("div", {
                             class: `sticky padding-small align-${this.dir[0]}`,
                             style: {
                                 display: 'flex',
                                 alignItems: 'center',
-                                gap: '6px'
+                                gap: '6px',
+                                ...category.background ? {
+                                    backgroundColor: category.background
+                                } : {}
                             },
                             children: [
                                 category.icon && category.icon.src && /*#__PURE__*/ (0, $55ec52987511209e$export$34b9dba7ce09269b)("img", {

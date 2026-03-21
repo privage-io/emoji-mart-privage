@@ -803,10 +803,9 @@ export default class Picker extends Component {
           type="button"
           class="flex flex-center flex-middle"
           tabindex="-1"
-          onClick={(e) => this.handleEmojiClick({ e, emoji, skin })}
+          onClick={(e) => { if (emoji.locked) { if (this.props.onLockedEmojiClick) this.props.onLockedEmojiClick(emoji); return; } this.handleEmojiClick({ e, emoji, skin }); }}
           onContextMenu={(e) => {
             e.preventDefault()
-            // inline skin disabled
           }}
           onMouseEnter={() => this.handleEmojiOver(pos)}
           onMouseLeave={() => this.handleEmojiOver()}
@@ -815,6 +814,7 @@ export default class Picker extends Component {
             height: this.props.emojiButtonSize,
             fontSize: this.props.emojiSize,
             lineHeight: 0,
+            ...(emoji.locked ? { opacity: 0.35, cursor: 'not-allowed' } : {}),
           }}
         >
           <div
@@ -939,8 +939,9 @@ export default class Picker extends Component {
               data-id={category.target ? category.target.id : category.id}
               class="category"
               ref={root}
+              style={category.background ? { backgroundColor: category.background } : undefined}
             >
-              <div class={`sticky padding-small align-${this.dir[0]}`} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <div class={`sticky padding-small align-${this.dir[0]}`} style={{ display: 'flex', alignItems: 'center', gap: '6px', ...(category.background ? { backgroundColor: category.background } : {}) }}>
                 {category.icon && category.icon.src && <img src={category.icon.src} style={{ width: 16, height: 16, borderRadius: '50%', objectFit: 'cover' }} />}
                 {category.name || I18n.categories[category.id]}
               </div>

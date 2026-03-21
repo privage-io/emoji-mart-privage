@@ -91,6 +91,7 @@ export default {
     choices: [1, 2, 3, 4, 5, 6],
   },
   skinToneEmoji: null,
+  onLockedEmojiClick: null,
   skinTonePosition: {
     value: 'preview',
     choices: ['preview', 'search', 'none'],

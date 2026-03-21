@@ -155,6 +155,7 @@ export class Picker extends ShadowElement {
             choices: number[];
         };
         skinToneEmoji: any;
+        onLockedEmojiClick: any;
         skinTonePosition: {
             value: string;
             choices: string[];

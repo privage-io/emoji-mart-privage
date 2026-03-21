@@ -695,6 +695,7 @@ var $f39d0d696aba82c3$export$2e2bcd8739ae039 = {
             6
         ]
     },
+    skinToneEmoji: null,
     skinTonePosition: {
         value: 'preview',
         choices: [
@@ -2881,7 +2882,12 @@ class $75afa6943437e26f$export$2e2bcd8739ae039 extends (0, $d5fc6ac583bc94a1$exp
                     width: this.props.emojiSize,
                     height: this.props.emojiSize
                 },
-                children: /*#__PURE__*/ (0, $55ec52987511209e$export$34b9dba7ce09269b)("span", {
+                children: this.props.skinToneEmoji ? /*#__PURE__*/ (0, $55ec52987511209e$export$34b9dba7ce09269b)("span", {
+                    style: {
+                        fontSize: this.props.emojiSize
+                    },
+                    children: typeof this.props.skinToneEmoji === "object" ? this.props.skinToneEmoji[this.state.skin] : this.props.skinToneEmoji
+                }) : /*#__PURE__*/ (0, $55ec52987511209e$export$34b9dba7ce09269b)("span", {
                     class: `skin-tone skin-tone-${this.state.skin}`
                 })
             })
@@ -2946,7 +2952,12 @@ class $75afa6943437e26f$export$2e2bcd8739ae039 extends (0, $d5fc6ac583bc94a1$exp
                             onMouseLeave: ()=>this.handleSkinMouseOver(),
                             class: "option flex flex-grow flex-middle",
                             children: [
-                                /*#__PURE__*/ (0, $55ec52987511209e$export$34b9dba7ce09269b)("span", {
+                                this.props.skinToneEmoji ? /*#__PURE__*/ (0, $55ec52987511209e$export$34b9dba7ce09269b)("span", {
+                                    style: {
+                                        fontSize: "1.2em"
+                                    },
+                                    children: typeof this.props.skinToneEmoji === "object" ? this.props.skinToneEmoji[skin] : this.props.skinToneEmoji
+                                }) : /*#__PURE__*/ (0, $55ec52987511209e$export$34b9dba7ce09269b)("span", {
                                     class: `skin-tone skin-tone-${skin}`
                                 }),
                                 /*#__PURE__*/ (0, $55ec52987511209e$export$34b9dba7ce09269b)("span", {

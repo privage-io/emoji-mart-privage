@@ -24,6 +24,7 @@ export default class Picker extends Component {
       pos: [-1, -1],
       perLine: this.initDynamicPerLine(props),
       visibleRows: { 0: true },
+      collapsed: new Set(props.collapsedCategories || []),
       ...this.getInitialState(props),
     }
   }
@@ -86,12 +87,15 @@ export default class Picker extends Component {
     clearTimeout(this.nextStateTimer)
     this.nextStateTimer = setTimeout(() => {
       let requiresGridReset = false
+      let requiresGridRebuild = false
 
       for (const k in this.nextState) {
         this.props[k] = this.nextState[k]
 
         if (k === 'custom' || k === 'categories') {
           requiresGridReset = true
+        } else if (k === 'collapsedCategories') {
+          requiresGridRebuild = true
         }
       }
 
@@ -102,8 +106,48 @@ export default class Picker extends Component {
         return this.reset(nextState)
       }
 
+      if (requiresGridRebuild) {
+        nextState.collapsed = new Set(this.props.collapsedCategories || [])
+        return this.rebuildGrid(nextState)
+      }
+
       this.setState(nextState)
     })
+  }
+
+  // Rebuild the row grid without re-initializing the data: rows of collapsed
+  // categories are left out, so row chunks and keyboard navigation stay
+  // contiguous over what is actually shown.
+  rebuildGrid(nextState = {}, callback) {
+    if (nextState.collapsed) this.state.collapsed = nextState.collapsed
+    this.initGrid()
+    this.unobserve()
+
+    this.setState(nextState, () => {
+      this.observeCategories()
+      this.observeRows()
+      if (callback) callback()
+    })
+  }
+
+  isCollapsed(categoryId) {
+    return this.state.collapsed.has(categoryId)
+  }
+
+  toggleCategory(categoryId, callback) {
+    const collapsed = new Set(this.state.collapsed)
+    if (collapsed.has(categoryId)) collapsed.delete(categoryId)
+    else collapsed.add(categoryId)
+
+    this.rebuildGrid({ collapsed }, callback)
+
+    if (this.props.onCategoryToggle) {
+      this.props.onCategoryToggle({
+        id: categoryId,
+        collapsed: collapsed.has(categoryId),
+        collapsedCategories: [...collapsed],
+      })
+    }
   }
 
   componentWillUnmount() {
@@ -182,6 +226,12 @@ export default class Picker extends Component {
 
     for (let category of categories) {
       const rows = []
+
+      if (this.props.collapsibleCategories && this.isCollapsed(category.id)) {
+        this.refs.categories.set(category.id, { root: createRef(), rows })
+        continue
+      }
+
       let row = addRow(rows, category)
 
       for (let emoji of category.emojis) {
@@ -613,7 +663,21 @@ export default class Picker extends Component {
   }
 
   handleCategoryClick = ({ category, i }) => {
-    this.scrollTo(i == 0 ? { row: -1 } : { categoryId: category.id })
+    const target = i == 0 ? { row: -1 } : { categoryId: category.id }
+
+    // Jumping to a collapsed section opens it first, so the jump lands on
+    // its emojis rather than a bare header.
+    if (this.props.collapsibleCategories && this.isCollapsed(category.id)) {
+      return this.toggleCategory(category.id, () => this.scrollTo(target))
+    }
+
+    this.scrollTo(target)
+  }
+
+  handleCategoryHeaderKeyDown = (e, categoryId) => {
+    if (e.key != 'Enter' && e.key != ' ') return
+    e.preventDefault()
+    this.toggleCategory(categoryId)
   }
 
   handleEmojiOver(pos) {
@@ -933,16 +997,29 @@ export default class Picker extends Component {
       >
         {categories.map((category) => {
           const catRef = this.refs.categories.get(category.id) || { root: { current: null }, rows: [] }; const { root, rows } = catRef
+          const collapsible = !!this.props.collapsibleCategories
+          const collapsed = collapsible && this.isCollapsed(category.id)
 
           return (
             <div
               data-id={category.target ? category.target.id : category.id}
+              data-collapsed={collapsed ? '' : undefined}
               class="category"
               ref={root}
             >
-              <div class={`sticky padding-small align-${this.dir[0]}`} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <div
+                class={`sticky padding-small align-${this.dir[0]}${collapsible ? ' collapsible' : ''}`}
+                style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
+                role={collapsible ? 'button' : undefined}
+                tabIndex={collapsible ? 0 : undefined}
+                aria-expanded={collapsible ? !collapsed : undefined}
+                onMouseDown={collapsible ? this.preventDefault : undefined}
+                onClick={collapsible ? () => this.toggleCategory(category.id) : undefined}
+                onKeyDown={collapsible ? (e) => this.handleCategoryHeaderKeyDown(e, category.id) : undefined}
+              >
                 {category.icon && category.icon.src && <img src={category.icon.src} style={{ width: 16, height: 16, borderRadius: category.icon.radius || '20%', objectFit: 'cover' }} />}
                 {category.name || I18n.categories[category.id]}
+                {collapsible && <span class="collapse-indicator" aria-hidden="true"></span>}
               </div>
               <div
                 class="relative"

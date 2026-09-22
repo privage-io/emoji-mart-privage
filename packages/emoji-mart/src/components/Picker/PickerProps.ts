@@ -101,6 +101,13 @@ export default {
     choices: ['auto', 'light', 'dark'],
   },
 
+  // Collapsible category sections. `collapsedCategories` lists category ids
+  // whose rows are left out of the grid; the header stays and toggles them.
+  collapsibleCategories: {
+    value: false,
+  },
+  collapsedCategories: null,
+
   // Data
   categories: null,
   categoryIcons: null,
@@ -113,6 +120,7 @@ export default {
   getImageURL: null,
   getSpritesheetURL: null,
   onAddCustomEmoji: null,
+  onCategoryToggle: null,
   onClickOutside: null,
   onEmojiSelect: null,
 

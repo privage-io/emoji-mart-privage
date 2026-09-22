@@ -164,6 +164,10 @@ export class Picker extends ShadowElement {
             value: string;
             choices: string[];
         };
+        collapsibleCategories: {
+            value: boolean;
+        };
+        collapsedCategories: any;
         categories: any;
         categoryIcons: any;
         custom: any;
@@ -173,6 +177,7 @@ export class Picker extends ShadowElement {
         getImageURL: any;
         getSpritesheetURL: any;
         onAddCustomEmoji: any;
+        onCategoryToggle: any;
         onClickOutside: any;
         onEmojiSelect: any;
         stickySearch: {
